@@ -1,0 +1,100 @@
+generator losses | train: 0.08443, test: 147.4 | content: 32.77, color: 1135, texture: 0.1162, tv: 0.002725 | psnr: 10.49, ssim: nan
+
+generator losses | train: 41.1, test: 34.15 | content: 15.26, color: 185.5, texture: 0.0499, tv: 0.0007766 | psnr: 18.61, ssim: 0.8259
+
+generator losses | train: 30.72, test: 36.11 | content: 14.32, color: 213.7, texture: 0.05303, tv: 0.0009758 | psnr: 18.61, ssim: 0.8556
+
+generator losses | train: 30.42, test: 28.04 | content: 12.98, color: 145.8, texture: 0.04364, tv: 0.001145 | psnr: 20.04, ssim: 0.8735
+
+generator losses | train: 27.97, test: 26.78 | content: 12.48, color: 138, texture: 0.04188, tv: 0.001205 | psnr: 19.83, ssim: 0.883
+
+generator losses | train: 25.79, test: 21.98 | content: 10.84, color: 104.7, texture: 0.03797, tv: 0.00164 | psnr: 21.08, ssim: 0.9032
+
+generator losses | train: 25.92, test: 23.7 | content: 11.06, color: 119.3, texture: 0.03826, tv: 0.001758 | psnr: 20.87, ssim: 0.9031
+
+generator losses | train: 24.88, test: 21.58 | content: 10.18, color: 107.7, texture: 0.03921, tv: 0.00154 | psnr: 21.08, ssim: 0.9041
+
+generator losses | train: 24.1, test: 21.56 | content: 9.651, color: 112.7, texture: 0.03824, tv: 0.001555 | psnr: 21.36, ssim: 0.9059
+
+generator losses | train: 23.2, test: 21.8 | content: 10.35, color: 107.3, texture: 0.03761, tv: 0.001744 | psnr: 21.26, ssim: 0.904
+
+generator losses | train: 21.56, test: 22.13 | content: 9.686, color: 117.7, texture: 0.0386, tv: 0.00164 | psnr: 21.34, ssim: 0.8975
+
+generator losses | train: 23.48, test: 25.84 | content: 9.799, color: 153.4, texture: 0.0432, tv: 0.001696 | psnr: 20.41, ssim: 0.9031
+
+generator losses | train: 22.85, test: 21.94 | content: 9.822, color: 113.9, texture: 0.03979, tv: 0.001779 | psnr: 20.89, ssim: 0.9074
+
+generator losses | train: 22.44, test: 20.7 | content: 9.225, color: 107.1, texture: 0.03754, tv: 0.001874 | psnr: 21.54, ssim: 0.9058
+
+generator losses | train: 21.61, test: 22.28 | content: 9.368, color: 121.2, texture: 0.03799, tv: 0.001928 | psnr: 21.37, ssim: 0.9053
+
+generator losses | train: 21.84, test: 21.93 | content: 10.08, color: 111.3, texture: 0.03842, tv: 0.001781 | psnr: 20.91, ssim: 0.9041
+
+generator losses | train: 21.29, test: 24.11 | content: 9.005, color: 143.5, texture: 0.04078, tv: 0.001843 | psnr: 20.83, ssim: 0.9064
+
+generator losses | train: 21.36, test: 20.33 | content: 8.928, color: 105.7, texture: 0.03645, tv: 0.002049 | psnr: 21.53, ssim: 0.91
+
+generator losses | train: 22.53, test: 22.37 | content: 9.018, color: 125.3, texture: 0.03805, tv: 0.002011 | psnr: 21.33, ssim: 0.9077
+
+generator losses | train: 20.41, test: 21.67 | content: 8.56, color: 124, texture: 0.03889, tv: 0.001723 | psnr: 21.39, ssim: 0.8978
+
+generator losses | train: 21.57, test: 23.27 | content: 9.031, color: 134.4, texture: 0.04027, tv: 0.001958 | psnr: 21.23, ssim: 0.9111
+
+generator losses | train: 20.34, test: 19.02 | content: 8.554, color: 96.71, texture: 0.03644, tv: 0.001955 | psnr: 21.74, ssim: 0.9133
+
+generator losses | train: 21.86, test: 32.71 | content: 12.08, color: 197.4, texture: 0.04516, tv: 0.002185 | psnr: 19.39, ssim: 0.894
+
+generator losses | train: 20.97, test: 19.51 | content: 8.516, color: 101.3, texture: 0.03599, tv: 0.002125 | psnr: 21.81, ssim: 0.9123
+
+generator losses | train: 21.57, test: 24.45 | content: 8.557, color: 150.4, texture: 0.04289, tv: 0.002099 | psnr: 21.03, ssim: 0.9072
+
+generator losses | train: 20, test: 20.49 | content: 8.448, color: 113.2, texture: 0.03773, tv: 0.001761 | psnr: 21.61, ssim: 0.9034
+
+generator losses | train: 21.78, test: 20.86 | content: 9.006, color: 111, texture: 0.03803, tv: 0.00186 | psnr: 21.2, ssim: 0.9086
+
+generator losses | train: 20.05, test: 22.72 | content: 9.131, color: 128.3, texture: 0.03907, tv: 0.001845 | psnr: 21.3, ssim: 0.9011
+
+generator losses | train: 19.94, test: 22.12 | content: 8.517, color: 129.1, texture: 0.03958, tv: 0.001685 | psnr: 21.45, ssim: 0.8988
+
+generator losses | train: 20.37, test: 20.99 | content: 8.491, color: 117, texture: 0.03906, tv: 0.001963 | psnr: 21.53, ssim: 0.9118
+
+30000 generator losses | train: 20.34, test: 21.94 | content: 8.583, color: 125.3, texture: 0.03927, tv: 0.002012 | psnr: 21.53, ssim: 0.9096
+
+generator losses | train: 20.41, test: 19.01 | content: 8.187, color: 99.69, texture: 0.03688, tv: 0.00209 | psnr: 21.78, ssim: 0.9141
+
+generator losses | train: 20.38, test: 19.45 | content: 8.098, color: 106.2, texture: 0.03685, tv: 0.001797 | psnr: 21.78, ssim: 0.9082
+
+33000 generator losses | train: 19.32, test: 18.33 | content: 7.966, color: 95.51, texture: 0.03545, tv: 0.002 | psnr: 22.08, ssim: 0.915
+
+generator losses | train: 21.06, test: 19.61 | content: 7.991, color: 107.1, texture: 0.03715, tv: 0.002227 | psnr: 21.79, ssim: 0.9142
+
+generator losses | train: 19.73, test: 19.07 | content: 8.245, color: 100.4, texture: 0.0369, tv: 0.001915 | psnr: 21.62, ssim: 0.9123
+
+generator losses | train: 19.67, test: 19.69 | content: 8.545, color: 103.8, texture: 0.03624, tv: 0.001865 | psnr: 21.82, ssim: 0.9107
+
+generator losses | train: 19.07, test: 19.46 | content: 8.074, color: 105.8, texture: 0.03617, tv: 0.001979 | psnr: 21.87, ssim: 0.9113
+
+generator losses | train: 19.26, test: 19.58 | content: 8.217, color: 105.8, texture: 0.0373, tv: 0.001924 | psnr: 21.63, ssim: 0.913
+
+39000 generator losses | train: 19.73, test: 19.99 | content: 8.125, color: 110.1, texture: 0.03667, tv: 0.002096 | psnr: 21.87, ssim: 0.9122
+
+40000 generator losses | train: 19.04, test: 19.32 | content: 8.195, color: 103.6, texture: 0.03607, tv: 0.001868 | psnr: 21.95, ssim: 0.9104
+
+41000 generator losses | train: 20.29, test: 20.1 | content: 8.298, color: 109.8, texture: 0.03679, tv: 0.002014 | psnr: 21.74, ssim: 0.9099
+
+42000 generator losses | train: 19.44, test: 19.51 | content: 7.926, color: 108, texture: 0.03646, tv: 0.001932 | psnr: 21.93, ssim: 0.9131
+
+43000 generator losses | train: 19.49, test: 19.73 | content: 7.897, color: 110.6, texture: 0.03666, tv: 0.001913 | psnr: 21.89, ssim: 0.9103
+
+44000 generator losses | train: 19.71, test: 19.25 | content: 8.003, color: 103.3, texture: 0.03695, tv: 0.002253 | psnr: 21.62, ssim: 0.9122
+
+45000 generator losses | train: 20.42, test: 18.75 | content: 8.125, color: 97.63, texture: 0.03629, tv: 0.002112 | psnr: 21.77, ssim: 0.9162
+
+46000 generator losses | train: 19.47, test: 19.29 | content: 7.931, color: 105.8, texture: 0.03645, tv: 0.001923 | psnr: 21.94, ssim: 0.9106
+
+47000 generator losses | train: 19.94, test: 20.24 | content: 7.704, color: 116.8, texture: 0.03838, tv: 0.002098 | psnr: 21.71, ssim: 0.9136
+
+48000 generator losses | train: 19.24, test: 19.31 | content: 8.186, color: 103.8, texture: 0.0361, tv: 0.001825 | psnr: 21.8, ssim: 0.9112
+
+49000 generator losses | train: 18.88, test: 18.8 | content: 7.686, color: 103.2, texture: 0.03656, tv: 0.001937 | psnr: 21.88, ssim: 0.9116
+
