@@ -1,4 +1,4 @@
-# image_enhancement
+# Low-Quality-to-DSLR-Translation
 This code is for matching low quailty images to DSLR quailty.
 
 Code borrows heavily from dped.

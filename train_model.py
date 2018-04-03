@@ -1,5 +1,3 @@
-# python train_model.py model={iphone,sony,blackberry} dped_dir=dped vgg_dir=vgg_pretrained/imagenet-vgg-verydeep-19.mat
-
 import tensorflow as tf
 from scipy import misc
 import numpy as np
