@@ -61,14 +61,27 @@ with tf.Graph().as_default(), tf.Session() as sess:
     enhanced_gray = tf.reshape(tf.image.rgb_to_grayscale(enhanced), [-1, PATCH_WIDTH * PATCH_HEIGHT])
     dslr_gray = tf.reshape(tf.image.rgb_to_grayscale(dslr_image),[-1, PATCH_WIDTH * PATCH_HEIGHT])
 
-
+    #Losses
+    '''
+    NOTICE:
+    We difine new texture losses bassed on some No-Reference Image Quality Assessment algorithms, 
+    and a color loss based on Automatic Colorization task.
+    Full code will be released upon the acceptance of the paper.
+    For now, we replace them with a simpler but effeictive texture loss below and dped color loss.'''
+#-------------------
     #  1) texture loss
     enhanced_x, enhanced_y=utils.compute_gradient(enhanced)
     dslr_image_x, dslr_image_y=utils.compute_gradient(dslr_image)
+
     loss_texture=tf.abs(enhanced_x-dslr_image_x)+tf.abs(enhanced_y-dslr_image_y)
 
+    # 2) color loss
+    enhanced_blur = utils.blur(enhanced)
+    dslr_blur = utils.blur(dslr_image)
 
-    # 2) content loss
+    loss_color= tf.reduce_sum(tf.pow(enhanced_blur - dslr_blur, 2))/(2 * batch_size)
+#-------------------
+    # 3) content loss
 
     CONTENT_LAYER = 'relu5_4'
 
@@ -79,12 +92,6 @@ with tf.Graph().as_default(), tf.Session() as sess:
     # loss_content = 2 * tf.abs(tf.subtract(enhanced_vgg[CONTENT_LAYER] ,dslr_vgg[CONTENT_LAYER]) )/ content_size 
     loss_content = 2 * tf.nn.l2_loss(enhanced_vgg[CONTENT_LAYER] - dslr_vgg[CONTENT_LAYER]) / content_size
 
-    # 3) color loss
-
-    enhanced_blur = utils.blur(enhanced)
-    dslr_blur = utils.blur(dslr_image)
-
-    loss_color= tf.reduce_sum(tf.pow(enhanced_blur - dslr_blur, 2))/(2 * batch_size)
 
     # 4) total variation loss
     #4.1 reference to athalye2015neuralstyle
@@ -97,7 +104,7 @@ with tf.Graph().as_default(), tf.Session() as sess:
     loss_tv = 2 * (x_tv/tv_x_size + y_tv/tv_y_size) / batch_size
 
     # final loss
-    loss_generator = w_content * loss_content + w_texture * loss_texture+w_color * loss_color + w_tv * loss_tv
+    cost = w_content * loss_content + w_texture * loss_texture+w_color * loss_color + w_tv * loss_tv
 
     # psnr loss
 
@@ -106,23 +113,44 @@ with tf.Graph().as_default(), tf.Session() as sess:
     loss_mse = tf.reduce_sum(tf.pow(dslr_ - enhanced_flat, 2))/(PATCH_SIZE * batch_size)
     loss_psnr = 20 * utils.log10(1.0 / tf.sqrt(loss_mse))
 
-    # optimize parameters of image enhancement (generator) and discriminator networks
+    # tf.summary.scalar('lossSum', cost)
+    # tf.summary.scalar('lossPSNR', loss_psnr)
+    
+    # tf.summary.image('enhanced_image', enhanced)
+    # # tf.summary.image('ldr_image', phone_image[:,:,:,9:12])
+    # tf.summary.image('ldr_image', phone_image[:,:,:,0:3])
+    # tf.summary.image('hdr_image', dslr_image)
+        
+    # merged = tf.summary.merge_all()
+    # writer = tf.summary.FileWriter('./graphs', sess.graph)
 
-    generator_vars = [v for v in tf.global_variables() if v.name.startswith("generator")]
+    # optimize parameters of image enhancement networks
 
-    train_step_gen = tf.train.AdamOptimizer(learning_rate).minimize(loss_generator, var_list=generator_vars)
+    train_params = [v for v in tf.global_variables() if v.name.startswith("generator")]
 
-    saver = tf.train.Saver(var_list=generator_vars, max_to_keep=100)
+    train_step = tf.train.AdamOptimizer(learning_rate).minimize(cost, var_list=train_params)
+
+    #--------------
+    #Optimizer
+    # global_step = tf.Variable(0, trainable=False)
+    # starter_learning_rate = learning_rate
+    # steps_per_epoch = 5000
+    # learning_rate = tf.train.exponential_decay(starter_learning_rate, global_step,
+    #                                            int(steps_per_epoch), 0.99, staircase=True)
+     
+    # optimizer= tf.train.AdamOptimizer(learning_rate, beta1=0.9, beta2=0.999,
+    #         epsilon=1e-8, use_locking=False)
+    # train_op=optimizer.minimize(cost, global_step=global_step, var_list = train_params)
+
+    saver = tf.train.Saver(var_list=train_params, max_to_keep=100)
 
     print('Initializing variables')
     sess.run(tf.global_variables_initializer())
 
     print('Training network')
 
-    train_loss_gen = 0.0
-    train_acc_discrim = 0.0
+    train_loss = 0.0
 
-    all_zeros = np.reshape(np.zeros((batch_size, 1)), [batch_size, 1])
     test_crops = test_data[np.random.randint(0, TEST_SIZE, 5), :]
 
     logs = open('models/' + phone + '.txt', "w+")
@@ -137,10 +165,13 @@ with tf.Graph().as_default(), tf.Session() as sess:
         phone_images = train_data[idx_train]
         dslr_images = train_answ[idx_train]
 
-        [loss_temp, temp] = sess.run([loss_generator, train_step_gen],
+        [loss_temp, temp] = sess.run([cost, train_step],
                                         feed_dict={phone_: phone_images, dslr_: dslr_images, adv_: all_zeros})
-        train_loss_gen += loss_temp / eval_step
+        train_loss += loss_temp / eval_step
 
+        # if i % 50 == 0:
+        #     summary = sess.run(merged, feed_dict={phone_: phone_images, dslr_: dslr_images})
+        #     writer.add_summary(summary, i)
 
         if i % eval_step == 0:
 
@@ -161,7 +192,7 @@ with tf.Graph().as_default(), tf.Session() as sess:
                 dslr_images = test_answ[be:en]
 
                 [enhanced_crops, losses] = sess.run([enhanced, \
-                                [loss_generator, loss_content, loss_texture, loss_color, loss_tv, loss_psnr]], \
+                                [cost, loss_content, loss_texture, loss_color, loss_tv, loss_psnr]], \
                                 feed_dict={phone_: phone_images, dslr_: dslr_images, adv_: swaps})
 
                 test_losses_gen += np.asarray(losses) / num_test_batches
@@ -172,7 +203,7 @@ with tf.Graph().as_default(), tf.Session() as sess:
 
 
             logs_gen = "step %d, %s | generator losses | train: %.4g, test: %.4g | content: %.4g, color: %.4g, texture: %.4g, tv: %.4g | psnr: %.4g, ssim: %.4g\n" % \
-                  (i, phone, train_loss_gen, test_losses_gen[0][0], test_losses_gen[0][1], test_losses_gen[0][2],
+                  (i, phone, train_loss, test_losses_gen[0][0], test_losses_gen[0][1], test_losses_gen[0][2],
                    test_losses_gen[0][3], test_losses_gen[0][4], test_losses_gen[0][5], loss_ssim)
 
             print(logs_gen)
@@ -187,7 +218,7 @@ with tf.Graph().as_default(), tf.Session() as sess:
             # save visual results for several test image crops
 
             enhanced_crops = sess.run(enhanced, feed_dict={phone_: test_crops, dslr_: dslr_images, adv_: all_zeros})
-
+             # print(enhanced_crops)
 
             idx = 0
             for crop in enhanced_crops:
@@ -195,8 +226,7 @@ with tf.Graph().as_default(), tf.Session() as sess:
                 misc.imsave('results/' + str(phone)+ "_" + str(idx) + '_iteration_' + str(i) + '.png', before_after)
                 idx += 1
 
-            train_loss_gen = 0.0
-            train_acc_discrim = 0.0
+            train_loss = 0.0
 
             # save the model that corresponds to the current iteration
 
